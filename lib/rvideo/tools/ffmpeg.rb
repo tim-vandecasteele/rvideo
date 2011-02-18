@@ -106,22 +106,34 @@ module RVideo
       end
       
       def format_resolution(params={})
-        inspect_original if @original.nil?
-        p = []
-        p << ["rotate=#{@original.video_orientation}"] if @original.rotated?
-        p << ["scale=#{params[:scale][:width].to_i}:#{params[:scale][:height].to_i}"]
+        params[:rotate] = original.video_orientation if original.rotated?
         
-        if params.has_key?(:letterbox)
-          plr = ((params[:letterbox][:width] - params[:scale][:width]) / 2).to_i
-          ptb = ((params[:letterbox][:height] - params[:scale][:height]) / 2).to_i
-          width = params[:letterbox][:width]
-          heigth = params[:letterbox][:height]
-          
-          if(plr > 0 || ptb > 0)
-            p << "pad=#{width.to_i}:#{heigth.to_i}:#{plr.to_i}:#{ptb.to_i}"
-          end
-        end
+        p = []
+        p << format_filter_rotation(params) if params.has_key?(:rotate)
+        p << format_filter_scale(params)
+        p << format_filter_pad(params) if params.has_key?(:letterbox)
+        p.compact!
+        
         %(-vf '#{p.join(',')}')
+      end
+      
+      def format_filter_rotation(params={})
+        "rotate=#{params[:rotate]}"
+      end
+
+      def format_filter_scale(params={})
+        "scale=#{params[:scale][:width].to_i}:#{params[:scale][:height].to_i}"
+      end
+
+      def format_filter_pad(params={})
+        plr = ((params[:letterbox][:width] - params[:scale][:width]) / 2).to_i
+        ptb = ((params[:letterbox][:height] - params[:scale][:height]) / 2).to_i
+        width = params[:letterbox][:width]
+        heigth = params[:letterbox][:height]
+        
+        if(plr > 0 || ptb > 0)
+          "pad=#{width.to_i}:#{heigth.to_i}:#{plr.to_i}:#{ptb.to_i}"
+        end
       end
 
       def format_audio_channels(params={})
@@ -153,7 +165,7 @@ module RVideo
         raise TranscoderError, "Transcoder hung."
       end      
       
-private
+      private
       
       def parse_progress(line, duration)
         if line =~ /Duration: (\d{2}):(\d{2}):(\d{2}).(\d{1})/
@@ -213,14 +225,13 @@ private
         end
         
         if m = /Unsupported codec.*id=(.*)\).*for input stream\s*(.*)\s*/.match(result) 
-          inspect_original if @original.nil?
           case m[2]
-          when @original.audio_stream_id
+          when original.audio_stream_id
             codec_type = "audio"
-            codec = @original.audio_codec
-          when @original.video_stream_id
+            codec = original.audio_codec
+          when original.video_stream_id
             codec_type = "video"
-            codec = @original.video_codec
+            codec = original.video_codec
           else
             codec_type = "video or audio"
             codec = "unknown"

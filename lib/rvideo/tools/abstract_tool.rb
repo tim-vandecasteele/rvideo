@@ -137,13 +137,13 @@ module RVideo # :nodoc:
         end
 
         def get_resolution
-          
+
           case @options['resolution']
-          when "copy"      then get_original_resolution
-          when "width"     then get_fit_to_width_resolution
-          when "height"    then get_fit_to_height_resolution
-          when "letterbox" then get_letterbox_resolution
-          when "padding"   then get_padding_resolution
+          when "original"      then get_original_resolution
+          when "fit-width"     then get_fit_to_width_resolution
+          when "fit-height"    then get_fit_to_height_resolution
+          when "pad"           then get_letterbox_resolution
+          when "letterbox"     then get_padding_resolution
           else
             if @options["width"] and not @options["height"]
               get_fit_to_width_resolution
@@ -160,7 +160,7 @@ module RVideo # :nodoc:
         def get_padding_resolution
           lw = get_valid_width
           lh = get_valid_height
-
+          
           raise TranscoderError::ParameterError,
             "invalid width of '#{lw}' for letterbox" unless valid_dimension?(lw)
           raise TranscoderError::ParameterError,
