@@ -106,10 +106,13 @@ module RVideo
       end
       
       def format_resolution(params={})
-        params[:rotate] = original.video_orientation if original.rotated?
-        
         p = []
-        p << format_filter_rotation(params) if params.has_key?(:rotate)
+
+        if original.rotated?
+          params[:rotate] = original.video_orientation
+          p << format_filter_rotation(params)
+        end
+        
         p << format_filter_scale(params)
         p << format_filter_pad(params) if params.has_key?(:letterbox)
         p.compact!

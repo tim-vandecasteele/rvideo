@@ -139,11 +139,10 @@ module RVideo # :nodoc:
         def get_resolution
 
           case @options['resolution']
-          when "original"      then get_original_resolution
-          when "fit-width"     then get_fit_to_width_resolution
-          when "fit-height"    then get_fit_to_height_resolution
-          when "pad"           then get_letterbox_resolution
-          when "letterbox"     then get_padding_resolution
+          when "copy"      then get_original_resolution
+          when "width"     then get_fit_to_width_resolution
+          when "height"    then get_fit_to_height_resolution
+          when "pad"       then get_letterbox_resolution
           else
             if @options["width"] and not @options["height"]
               get_fit_to_width_resolution
