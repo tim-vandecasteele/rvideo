@@ -1,18 +1,5 @@
 require 'open4'
 
-
-module Process
-
-  def self.descendant_processes(base=Process.pid)
-    descendants = Hash.new{|ht,k| ht[k]=[k]}
-    Hash[*`ps -eo pid,ppid`.scan(/\d+/).map{|x|x.to_i}].each{|pid,ppid|
-      descendants[ppid] << descendants[pid]
-    }
-    descendants[base].flatten - [base]
-  end
-
-end
-
 class IO
 
   def each_with_timeout(timeout, sep_string=$/)
