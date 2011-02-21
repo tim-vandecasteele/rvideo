@@ -133,7 +133,7 @@ module RVideo # :nodoc:
         end
 
         def resolution_keep_aspect_ratio
-          format_resolution(get_fit_to_width_resolution)
+          format_resolution(get_constrain_resolution)
         end
 
         def get_resolution
@@ -142,7 +142,7 @@ module RVideo # :nodoc:
           when "copy"      then get_original_resolution
           when "width"     then get_fit_to_width_resolution
           when "height"    then get_fit_to_height_resolution
-          when "pad"       then get_letterbox_resolution
+          when "letterbox" then get_letterbox_resolution
           else
             if @options["width"] and not @options["height"]
               get_fit_to_width_resolution
@@ -177,6 +177,28 @@ module RVideo # :nodoc:
 
           { :scale     => { :width => w,  :height => h  },
             :letterbox => { :width => w, :height => lh } }
+        end
+
+        def get_constrain_resolution
+          lw = get_valid_width
+          lh = get_valid_height
+          
+          raise TranscoderError::ParameterError,
+            "invalid width of '#{lw}' for letterbox" unless valid_dimension?(lw)
+          raise TranscoderError::ParameterError,
+            "invalid height of '#{lh}' for letterbox" unless valid_dimension?(lh)
+
+          w = calculate_width(original.width, original.height, lh)
+
+          if w > lw
+            w = lw
+            h = calculate_height(original.width, original.height, w)
+          else
+            h = lh
+            w = calculate_width(original.width, original.height, h)
+          end
+
+          { :scale => { :width => w,  :height => h  } }
         end
 
         def get_fit_to_width_resolution
