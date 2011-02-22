@@ -413,10 +413,9 @@ module RVideo # :nodoc:
         private
 
         VARIABLE_INTERPOLATION_SCAN_PATTERN = /[^\\]\$[-_a-zA-Z]+\$/
-        SCALE_PATTERN = /[^\\](\$scale_([0-9]+)x([0-9]+)\$)/
-        ADAPTIVE_SCALE_PATTERN = /[^\\](\$scale_([0-9]+)x([0-9]+)_or_([0-9]+)x([0-9]+)\$)/
                 
         def interpolate_variables(raw_command)
+          
           raw_command.scan(VARIABLE_INTERPOLATION_SCAN_PATTERN).each do |match|
             match = match[0..0] == "$" ? match : match[1..(match.size - 1)]
             match.strip!
@@ -429,32 +428,9 @@ module RVideo # :nodoc:
             
             raw_command.gsub!(match, value)
           end
-
-          raw_command.scan(ADAPTIVE_SCALE_PATTERN).each do |match, width, height, width2, height2|
-            r = original.ratio.to_f
-            aspect_4_3 = 4.0/3.0
-            
-            @options["resolution"] = 'padding'
-            
-            if (r > aspect_4_3)
-              @options["width"] = width2
-              @options["height"] = height2
-            else
-              @options["width"] = width
-              @options["height"] = height
-            end
-            
-            raw_command.gsub!(match, resolution)
-          end
-                    
-         raw_command.scan(SCALE_PATTERN).each do |match, width, height|
-           @options["width"] = width
-           @options["height"] = height
-           raw_command.gsub!(match, resolution)
-         end
-
-        raw_command.gsub("\\$", "$")
-      end
+          
+          raw_command.gsub("\\$", "$")
+        end
 
       #
       # Strip the $s. First, look for a supplied option that matches the
