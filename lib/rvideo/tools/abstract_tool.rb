@@ -415,8 +415,8 @@ module RVideo # :nodoc:
         VARIABLE_INTERPOLATION_SCAN_PATTERN = /[^\\]\$[-_a-zA-Z]+\$/
                 
         def interpolate_variables(raw_command)
-          
-          raw_command.scan(VARIABLE_INTERPOLATION_SCAN_PATTERN).each do |match|
+          scan_command = raw_command.clone
+          scan_command.scan(VARIABLE_INTERPOLATION_SCAN_PATTERN).each do |match|
             match = match[0..0] == "$" ? match : match[1..(match.size - 1)]
             match.strip!
 
@@ -426,10 +426,10 @@ module RVideo # :nodoc:
               matched_variable(match).to_s
             end
             
-            raw_command.gsub!(match, value)
+            scan_command.gsub!(match, value)
           end
           
-          raw_command.gsub("\\$", "$")
+          scan_command.gsub("\\$", "$")
         end
 
       #
