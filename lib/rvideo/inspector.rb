@@ -400,7 +400,8 @@ module RVideo # :nodoc:
     
     def video_orientation
       stdout=''
-      open4.spawn "qtrotate #{full_filename}", :stdout=> stdout, :timeout => 10
+      stderr=''
+      open4.spawn "qtrotate #{full_filename}", :stdout=> stdout, :timeout => 10, :stderr => stderr
       @orientation ||= stdout.chomp.to_i
     rescue Timeout::Error
       0
