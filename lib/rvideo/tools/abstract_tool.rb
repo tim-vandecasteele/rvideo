@@ -165,11 +165,10 @@ module RVideo # :nodoc:
           raise TranscoderError::ParameterError,
             "invalid height of '#{lh}' for letterbox" unless valid_dimension?(lh)
 
-          w = calculate_width(original.width, original.height, lh)
-          if w > lw
-            w = lw
-            h = calculate_height(original.width, original.height, w)
-          else
+          w = lw
+          h = calculate_height(original.width, original.height, w)
+          
+          if h > lh
             h = lh
             w = calculate_width(original.width, original.height, h)
           end
@@ -186,13 +185,11 @@ module RVideo # :nodoc:
             "invalid width of '#{lw}' for letterbox" unless valid_dimension?(lw)
           raise TranscoderError::ParameterError,
             "invalid height of '#{lh}' for letterbox" unless valid_dimension?(lh)
+          
+          w = lw
+          h = calculate_height(original.width, original.height, w)
 
-          w = calculate_width(original.width, original.height, lh)
-
-          if w > lw
-            w = lw
-            h = calculate_height(original.width, original.height, w)
-          else
+          if h > lh
             h = lh
             w = calculate_width(original.width, original.height, h)
           end
@@ -231,12 +228,10 @@ module RVideo # :nodoc:
           raise TranscoderError::ParameterError,
             "invalid height of '#{lh}' for letterbox" unless valid_dimension?(lh)
 
-          w = calculate_width(original.width, original.height, lh)
-          
-          if w > lw
-            w = lw
-            h = calculate_height(original.width, original.height, w)
-          else
+          w = lw
+          h = calculate_height(original.width, original.height, w)
+
+          if h > lh
             h = lh
             w = calculate_width(original.width, original.height, h)
           end
@@ -264,14 +259,12 @@ module RVideo # :nodoc:
         def calculate_width(ow, oh, h)
           w = ((ow.to_f / oh.to_f) * h.to_f).to_f rescue get_valid_width
           w = get_valid_width if w.nan?
-          w = w.ceil
           (w - w % 2)
         end
 
         def calculate_height(ow, oh, w)
           h = (w.to_f / (ow.to_f / oh.to_f)).to_f rescue get_valid_height
           h = get_valid_height if h.nan?
-          h = h.ceil
           (h - h % 2)
         end
 

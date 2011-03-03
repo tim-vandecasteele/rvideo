@@ -106,7 +106,7 @@ module RVideo
       it 'supports :width and :height options to build :resolution_and_padding with negatif ratio' do
         @options.merge! :width => "160", :height => "100"
         ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 $resolution_and_padding$ -y $output_file$", @options)
-        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=134:100' -y '#{@options[:output_file]}'"
+        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=132:100' -y '#{@options[:output_file]}'"
       end
       
       it 'supports odd value on width or height' do
