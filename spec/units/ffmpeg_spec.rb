@@ -106,7 +106,7 @@ module RVideo
       it 'supports :width and :height options to build :resolution_and_padding with negatif ratio' do
         @options.merge! :width => "160", :height => "100"
         ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 $resolution_and_padding$ -y $output_file$", @options)
-        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=132:100' -y '#{@options[:output_file]}'"
+        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=134:100' -y '#{@options[:output_file]}'"
       end
       
       it 'supports odd value on width or height' do
@@ -134,6 +134,15 @@ module RVideo
         @options.merge! :width => "225", :height => "222"
         ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 $resolution_and_padding$ -y $output_file$", @options)
         ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=224:168,pad=224:222:0:27' -y '#{@options[:output_file]}'"
+      end
+      
+      it 'supports odd value in the padding' do
+        @mock_original_file = mock(:original, :width => 1920, :height => 1080, :rotated? => false)
+        RVideo::Inspector.stub!(:new).and_return(@mock_original_file)
+
+        @options.merge! :width => "854", :height => "480"
+        ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 $resolution_and_padding$ -y $output_file$", @options)
+        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=854:480' -y '#{@options[:output_file]}'"
       end
 
       it 'supports :video_bit_rate' do
