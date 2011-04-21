@@ -121,7 +121,7 @@ module RVideo
       end
       
       def format_filter_rotation(params={})
-        "rotate=#{params[:rotate]}"
+        "transpose=#{params[:rotate].to_i / 90}"
       end
 
       def format_filter_scale(params={})
