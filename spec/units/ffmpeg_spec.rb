@@ -58,7 +58,6 @@ module RVideo
           :output_file => "test"
         }
         
-        Ffmpeg.video_bit_rate_parameter = Ffmpeg::DEFAULT_VIDEO_BIT_RATE_PARAMETER
       end
       
       it 'supports copying the originsl :fps' do
@@ -150,15 +149,6 @@ module RVideo
         ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ $video_bit_rate$ -y $output_file$", @options)
         ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -b 666k -y '#{@options[:output_file]}'"
       end
-
-      it "supports :video_bit_rate and configurable command flag" do
-        Ffmpeg.video_bit_rate_parameter = "v"
-        @options.merge! :video_bit_rate => 666
-        ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ $video_bit_rate$ -y $output_file$", @options)
-        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -v 666k -y '#{@options[:output_file]}'"
-      end
-      
-      ###
 
       it "supports :video_bit_rate_tolerance" do
         @options.merge! :video_bit_rate_tolerance => 666

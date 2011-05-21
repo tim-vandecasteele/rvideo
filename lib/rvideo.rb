@@ -1,12 +1,13 @@
-$LOAD_PATH.unshift File.dirname(__FILE__)
-
 # core extensions
 require 'rvideo/float'
 require 'rvideo/string'
 
 # gems
-require 'rubygems'
 require 'active_support'
+require 'active_support/inflector'
+require 'active_support/hash_with_indifferent_access'
+require 'active_support/core_ext/object/blank'
+
 require 'open4'
 
 # rvideo
@@ -29,15 +30,7 @@ require 'rvideo/tools/segmenter'
 require 'rvideo/tools/handbrakecli'
 require 'rvideo/tools/lame'
 
-TEMP_PATH   = File.expand_path(File.dirname(__FILE__) + '/../tmp')
-REPORT_PATH = File.expand_path(File.dirname(__FILE__) + '/../report')
-
-module RVideo
-  # Configure logging. Assumes that the logger object has an 
-  # interface similar to stdlib's Logger class.
-  #   
-  #   RVideo.logger = Logger.new(STDOUT)
-  #
+module  RVideo
   def self.logger=(logger)
     @logger = logger
   end

@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 module RVideo
-  context "Using various builds of ffmpeg, RVideo should properly inspect" do
+  describe "Using various builds of ffmpeg, RVideo should properly inspect" do
     it "a cell-phone MP4 file" do
       file = Inspector.new(:raw_response => files(:kites))
       file.container.should == "mov,mp4,m4a,3gp,3g2,mj2"

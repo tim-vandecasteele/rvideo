@@ -44,7 +44,7 @@ module RVideo
 
     end
     
-    context Mencoder, " result parsing should raise an exception" do
+    describe Mencoder, " result parsing should raise an exception" do
       
       before(:each) do
         setup_mencoder_spec

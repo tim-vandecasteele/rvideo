@@ -35,14 +35,7 @@ module RVideo
       
       VALID_ASPECT_STRINGS = ["4:3", "16:9"]
       VALID_ASPECT_FLOATS  = [1.3333, 1.7777]
-      
-      # The flag used to set video bitrate has apparently changed between 
-      # different ffmpeg versions. In the latest builds -b is used. 
-      # In older builds it was -v which is now used to set verbosity of logging.
-      DEFAULT_VIDEO_BIT_RATE_PARAMETER = "b"
-      cattr_accessor :video_bit_rate_parameter
-      self.video_bit_rate_parameter = DEFAULT_VIDEO_BIT_RATE_PARAMETER
-      
+            
       include AbstractTool::InstanceMethods
       
       attr_reader :frame, :q, :size, :time, :output_bitrate, :video_size, :audio_size, :header_size, :overhead, :psnr, :output_fps, :pid
@@ -67,7 +60,7 @@ module RVideo
       end
       
       def format_video_bit_rate(params = {})
-        "-#{video_bit_rate_parameter} #{params[:video_bit_rate]}k"
+        "-b #{params[:video_bit_rate]}k"
       end
       
       def format_video_bit_rate_tolerance(params = {})

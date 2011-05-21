@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../lib/rvideo'
 
-# Because rspec's assertion style is a stupid, giant 
-# fucking waste of time. It's true!
-require 'spec/interop/test'
+TEMP_PATH   = File.expand_path(File.dirname(__FILE__) + '/../tmp')
+REPORT_PATH = File.expand_path(File.dirname(__FILE__) + '/../report')
+
 require File.dirname(__FILE__) + "/support"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

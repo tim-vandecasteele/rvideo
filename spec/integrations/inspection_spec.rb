@@ -8,87 +8,87 @@ module RVideo
     end
     
     it "is valid" do
-      assert @i.valid?
+      @i.should be_valid
     end
     
     it "knows the bitrate" do
-      assert_equal 2078, @i.bitrate
+      @i.bitrate.should == 2078
     end
     
     it "knows the bitrate units" do
-      assert_equal "kb/s", @i.bitrate_units
+      @i.bitrate_units.should == "kb/s"
     end
     
     it "gives the bitrate and units together" do
-      assert_equal "2078 kb/s", @i.bitrate_with_units
+      @i.bitrate_with_units.should == "2078 kb/s"
     end
     
     it "knows the duration in milliseconds" do
-      assert_equal 15160, @i.duration
+      @i.duration.should == 15160
     end
     
     it "gives the duration as a string with : separating units of time" do
-      assert_equal "00:00:15.16", @i.raw_duration
+      @i.raw_duration.should == "00:00:15.16"
     end
     
     ###
     
     it "knows the video codec" do
-      assert_equal "mjpeg", @i.video_codec
+      @i.video_codec.should == "mjpeg"
     end
     
     it "knows the resolution" do
-      assert_equal "320x240", @i.resolution
+      @i.resolution.should == "320x240"
     end
     
     it "knows the width" do
-      assert_equal 320, @i.width
+      @i.width.should == 320
     end
     
     it "knows the height" do
-      assert_equal 240, @i.height
+      @i.height.should == 240
     end
     
     ###
     
     it "knows the audio codec" do
-      assert_equal "adpcm_ima_wav", @i.audio_codec
+      @i.audio_codec.should == "adpcm_ima_wav"
     end
     
     it "knows the audio sample rate" do
-      assert_equal 11025, @i.audio_sample_rate
+      @i.audio_sample_rate.should == 11025
     end
     
     it "knows the audio sample rate units" do
-      assert_equal "Hz", @i.audio_sample_rate_units
+      @i.audio_sample_rate_units.should == "Hz"
     end
     
     it "gives the audio sample rate and units together" do
-      assert_equal "11025 Hz", @i.audio_sample_rate_with_units
+      @i.audio_sample_rate_with_units.should == "11025 Hz"
     end
     
     it "knows the audio channels" do
-      assert_equal 1, @i.audio_channels
+      @i.audio_channels.should == 1
     end
     
     it "gives the audio channels as a string" do
-      assert_equal "1 channels", @i.audio_channels_string
+      @i.audio_channels_string.should == "1 channels"
     end
     
     it "knows the audio bit rate" do
-      assert_equal 44, @i.audio_bit_rate
+      @i.audio_bit_rate.should == 44
     end
     
     it "knows the audio bit rate units" do
-      assert_equal "kb/s", @i.audio_bit_rate_units
+      @i.audio_bit_rate_units.should == "kb/s"
     end
     
     it "gives the audio bit rate with units" do
-      assert_equal "44 kb/s", @i.audio_bit_rate_with_units
+      @i.audio_bit_rate_with_units.should == "44 kb/s"
     end
     
     it "knows the audio sample bit depth" do
-      assert_equal 16, @i.audio_sample_bit_depth
+      @i.audio_sample_bit_depth.should == 16
     end
     
     # Input #0, avi, from 'spec/files/boat.avi':
@@ -103,23 +103,12 @@ module RVideo
     end
     
     it "knows the pixel aspect ratio" do
-      assert_equal "1:1", @i.pixel_aspect_ratio
+      @i.pixel_aspect_ratio.should == "1:1"
     end
     
     it "knows the display aspect ratio" do
-      assert_equal "11:9", @i.display_aspect_ratio
+      @i.display_aspect_ratio.should == "11:9"
     end
   end
-  
-  describe Inspector, "with kites.mp4" do
-    before(:each) do
-      @i = Inspector.new :file => '/Users/vivien/Downloads/995b7684b98fac47b7b9affd5578c15a.avi'
-    end
     
-    it "knows the pixel aspect ratio" do
-      assert_equal "384 kb/s", @i.audio_bit_rate_with_units
-    end
-
-  end
-  
 end

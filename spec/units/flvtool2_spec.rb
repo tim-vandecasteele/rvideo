@@ -48,7 +48,7 @@ module RVideo
       end
     end
     
-    context Flvtool2, " result parsing should raise an exception" do
+    describe Flvtool2, " result parsing should raise an exception" do
       
       before(:each) do
         setup_flvtool2_spec
