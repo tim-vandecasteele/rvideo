@@ -1,8 +1,5 @@
 require File.dirname(__FILE__) + '/../lib/rvideo'
 
-TEMP_PATH   = File.expand_path(File.dirname(__FILE__) + '/../tmp')
-REPORT_PATH = File.expand_path(File.dirname(__FILE__) + '/../report')
-
 require File.dirname(__FILE__) + "/support"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

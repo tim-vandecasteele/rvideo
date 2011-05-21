@@ -1,6 +1,7 @@
 # core extensions
 require 'rvideo/float'
 require 'rvideo/string'
+require 'logger'
 
 # gems
 require 'active_support'

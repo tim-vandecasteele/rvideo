@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rvideo (0.0.1)
-      activesupport
+      activesupport (>= 3)
       open4
 
 GEM

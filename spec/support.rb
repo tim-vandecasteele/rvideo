@@ -1,8 +1,8 @@
 ###
-require 'logger'
 
+TEMP_PATH   = File.expand_path(File.dirname(__FILE__) + '/../tmp')
+REPORT_PATH = File.expand_path(File.dirname(__FILE__) + '/../report')
 FIXTURE_PATH   = File.expand_path(File.dirname(__FILE__) + '/../spec/fixtures')
-
 LOG_PATH = File.join(File.dirname(__FILE__), "spec.log")
 RVideo.logger = Logger.new LOG_PATH
 
