@@ -91,7 +91,7 @@ module RVideo
         "Must be a number, optionally followed by s, f, or p."
       end
 
-      if (t * 1000) > @inspector.duration
+      if (t * 1000) > @inspector.duration.to_i
         calculate_time("99%")
       else
         t
