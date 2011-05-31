@@ -10,7 +10,7 @@ module RVideo
       end
 
       def format_fps(params={})
-          " -rate=#{params[:fps]}" 
+          " -rate=%0.2f" % params[:fps].to_f
       end
 
       def parse_result(result)

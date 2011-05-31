@@ -10,7 +10,7 @@ module RVideo
       end
 
       def format_fps(params={})
-        " -ofps #{params[:fps]}" 
+        " -ofps %0.2f" % params[:fps].to_f
       end
 
       def format_resolution(params={})

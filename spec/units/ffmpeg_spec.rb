@@ -60,7 +60,7 @@ module RVideo
         
       end
       
-      it 'supports copying the originsl :fps' do
+      it 'supports copying the original :fps' do
         @options.merge! :fps => "copy"
         ffmpeg = Ffmpeg.new("ffmpeg -i $input_file$ -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame $fps$ -vf 'scale=320:240' -y $output_file$", @options)
         ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 15.10 -vf 'scale=320:240' -y '#{@options[:output_file]}'"
