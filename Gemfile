@@ -4,6 +4,5 @@ source "http://rubygems.org"
 gemspec
 
 group :test do
-  gem 'i18n'
   gem 'rspec', :require => 'spec'
 end
