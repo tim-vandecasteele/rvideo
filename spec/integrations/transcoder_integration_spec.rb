@@ -5,6 +5,7 @@ module RVideo
     it "with kites.mp4" do
       output_file = "#{TEMP_PATH}/kites.flv"
       FileUtils.rm_f(output_file)
+      FileUtils.mkdir_p TEMP_PATH
       FileTest.exist?(output_file).should_not be_true
       transcoder = Transcoder.new(spec_file("kites.mp4"))
       transcoder.original.class.should == Inspector
