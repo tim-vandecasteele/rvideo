@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + '/../lib/rvideo'
+require File.expand_path('../../lib/rvideo', __FILE__)
 
-require File.dirname(__FILE__) + "/support"
+require File.expand_path('../support', __FILE__)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # NOTE some expectations in these specs may rely on behavior            #

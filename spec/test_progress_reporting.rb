@@ -1,5 +1,5 @@
+require File.dirname(__FILE__) + '/spec_helper'
 require 'lib/rvideo'
-require 'spec/support'
 
 FileUtils.mkdir_p TEMP_PATH
 
