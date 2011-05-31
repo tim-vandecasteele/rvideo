@@ -1,3 +1,4 @@
 spec/spec.log
 .DS_Store
 pkg/*
+Gemfile.lock
