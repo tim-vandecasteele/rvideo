@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "rvideo"
 
   s.add_dependency "activesupport"
-  s.add_dependency "open4"
+  s.add_dependency "posix-spawn"
 
   s.add_development_dependency "rake"
   s.add_development_dependency "i18n"

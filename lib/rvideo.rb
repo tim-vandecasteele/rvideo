@@ -2,14 +2,14 @@
 require 'rvideo/float'
 require 'rvideo/string'
 require 'logger'
+require 'timeout'
 
 # gems
 require 'active_support'
 require 'active_support/inflector'
 require 'active_support/hash_with_indifferent_access'
 require 'active_support/core_ext/object/blank'
-
-require 'open4'
+require 'posix/spawn'
 
 # rvideo
 require 'rvideo/command_executor'

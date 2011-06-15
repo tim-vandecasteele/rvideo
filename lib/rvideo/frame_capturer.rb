@@ -37,6 +37,7 @@ module RVideo
   # For more precision, you can try multiple capture commands, each getting
   # a single frame but with increasing offsets.
   class FrameCapturer
+    include POSIX::Spawn
     attr_reader :input, :output, :offset, :rate, :limit, :inspector, :command
 
     def self.capture!(options)

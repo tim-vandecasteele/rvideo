@@ -399,13 +399,11 @@ module RVideo # :nodoc:
     end
     
     def video_orientation
-      stdout=''
-      stderr=''
-      open4.spawn "qtrotate #{full_filename}", :stdout=> stdout, :timeout => 10, :stderr => stderr
-      @orientation ||= stdout.chomp.to_i
-    rescue Timeout::Error
-      0
-    rescue
+      return @orientation if @orientation
+      child = POSIX::Spawn::Child.new("qtrotate #{full_filename}", :timeout => 10)
+      @orientation = child.out.chomp.to_i
+    rescue => ex
+      RVideo.logger.error(ex)
       0
     end
     
