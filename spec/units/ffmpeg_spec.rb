@@ -385,6 +385,10 @@ module RVideo
         parsing_result(:unwritable_stream).
           should raise_error(TranscoderError, /flv doesnt support.*incorrect codec/)
       end
+
+      it "on bus error" do
+        parsing_result(:bus_error).should raise_error(TranscoderError::BusError, /bus error/)
+      end
       
     end
   end

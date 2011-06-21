@@ -249,6 +249,10 @@ module RVideo
         if details =~ /Could not write header/
           raise TranscoderError, details
         end
+
+        if details =~ /Bus error$/
+          raise TranscoderError::BusError, "FFmpeg exited unexpectedly with a bus error"
+        end
         
         #frame=  584 q=6.0 Lsize=     708kB time=19.5 bitrate= 297.8kbits/s    
         #video:49kB audio:153kB global headers:0kB muxing overhead 250.444444%

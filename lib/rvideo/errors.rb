@@ -20,5 +20,12 @@ module RVideo
     
     class UnknownTool < TranscoderError
     end
+
+    # Raised when the tool is broken
+    class FFmpegError < TranscoderError
+    end
+
+    class BusError < FFmpegError
+    end
   end
 end
