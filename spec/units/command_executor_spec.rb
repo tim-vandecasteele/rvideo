@@ -4,6 +4,8 @@ include RVideo
 
 describe RVideo::CommandExecutor do
 
+  # Change the default timeout
+  RVideo::CommandExecutor.send(:remove_const, "STDOUT_TIMEOUT")
   RVideo::CommandExecutor.const_set("STDOUT_TIMEOUT", 1.5)
 
   before(:each) do
