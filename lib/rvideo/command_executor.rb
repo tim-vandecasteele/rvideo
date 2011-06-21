@@ -33,7 +33,6 @@ module RVideo
             fd.set_encoding('BINARY', 'BINARY')
           end
           out.force_encoding('BINARY')
-          err.force_encoding('BINARY')
           input = input.dup.force_encoding('BINARY') if input
         end
 
