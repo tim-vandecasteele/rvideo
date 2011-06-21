@@ -20,10 +20,8 @@ def recipes(key)
   load_fixture(:recipes)[key.to_s]
 end
 
-# The strip in here is important as the result parsing is apparently 
-# quite fussy about leading or trailing whitespace.
 def ffmpeg_result(key)
-  load_fixture(:ffmpeg_results)[key.to_s].strip
+  load_fixture(:ffmpeg_results)[key.to_s]
 end
 
 ###
