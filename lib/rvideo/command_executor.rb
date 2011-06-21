@@ -227,7 +227,7 @@ module RVideo
     end
 
     def self.execute_with_block(command, line_separator=$/, use_stderr = true, &each_line)
-      child = ChildWithBlock.new(command, :io_timeout => 2, :line_separator => line_separator, :each_select => (use_stderr ? :err : :out), &each_line)
+      child = ChildWithBlock.new(command, :io_timeout => 200, :line_separator => line_separator, :each_select => (use_stderr ? :err : :out), &each_line)
       return [child.err, child.out]
     end
 
