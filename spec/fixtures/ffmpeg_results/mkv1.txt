@@ -1,0 +1,49 @@
+FFmpeg version SVN-r25831, Copyright (c) 2000-2010 the FFmpeg developers
+  built on Nov 26 2010 17:30:08 with gcc 4.2.1 (Apple Inc. build 5664)
+  configuration: --prefix=/Users/vivien/dev/work/panda/panda_ffmpegs/ffmpeg06/olibs --enable-static --disable-shared --enable-postproc --enable-nonfree --enable-libx264 --enable-gpl --enable-libfaac --enable-libmp3lame --enable-libtheora --enable-libxvid --enable-libvorbis --enable-libgsm --enable-libvpx --enable-avfilter --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-version3 --disable-ffplay --disable-ffserver --disable-ffprobe --extra-cflags=-I/Users/vivien/dev/work/panda/panda_ffmpegs/ffmpeg06/olibs/include --extra-ldflags=-L/Users/vivien/dev/work/panda/panda_ffmpegs/ffmpeg06/olibs/lib --prefix=/Users/vivien/dev/work/panda/panda_ffmpegs/ffmpeg06/dist
+  libavutil     50.33. 0 / 50.33. 0
+  libavcore      0.14. 0 /  0.14. 0
+  libavcodec    52.97. 2 / 52.97. 2
+  libavformat   52.87. 0 / 52.87. 0
+  libavdevice   52. 2. 2 / 52. 2. 2
+  libavfilter    1.65. 0 /  1.65. 0
+  libswscale     0.12. 0 /  0.12. 0
+  libpostproc   51. 2. 0 / 51. 2. 0
+[matroska,webm @ 0x10180b000] Estimating duration from bitrate, this may be inaccurate
+
+Seems stream 0 codec frame rate differs from container frame rate: 26367.00 (26367/1) -> 29.92 (359/12)
+Input #0, matroska,webm, from '02572acd1a20773a44b9bde6e19468c3.mkv':
+  Duration: 00:03:16.83, start: 0.000000, bitrate: N/A
+    Stream #0.0(eng): Video: mpeg4, yuv420p, 482x360 [PAR 1:1 DAR 241:180], 29.92 fps, 29.92 tbr, 1k tbn, 26367 tbc
+    Stream #0.1: Audio: aac, 22050 Hz, stereo, s16
+[buffer @ 0x101303b10] w:482 h:360 pixfmt:yuv420p
+[scale @ 0x101303e30] w:482 h:360 fmt:yuv420p -> w:556 h:416 fmt:yuv420p flags:0xa0000004
+[libx264 @ 0x10181f400] using SAR=1/1
+[libx264 @ 0x10181f400] using cpu capabilities: MMX2 SSE2Fast SSSE3 FastShuffle SSE4.1 Cache64
+[libx264 @ 0x10181f400] profile High, level 3.0
+[libx264 @ 0x10181f400] 264 - core 110 r1804 e89c4cf - H.264/MPEG-4 AVC codec - Copyleft 2003-2010 - http://www.videolan.org/x264.html - options: cabac=1 ref=4 deblock=1:0:0 analyse=0x3:0x113 me=umh subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 constrained_intra=0 bframes=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=abr mbtree=1 bitrate=1000 ratetol=1.0 qcomp=0.60 qpmin=10 qpmax=51 qpstep=4 ip_ratio=1.41 aq=1:1.00
+Output #0, mp4, to 'video_tmp_noqt.mp4':
+  Metadata:
+    encoder         : Lavf52.87.0
+    Stream #0.0(eng): Video: libx264, yuv420p, 556x416 [PAR 1:1 DAR 139:104], q=10-51, 1000 kb/s, 748 tbn, 29.92 tbc
+    Stream #0.1: Audio: libfaac, 44100 Hz, stereo, s16, 128 kb/s
+Stream mapping:
+  Stream #0.0 -> #0.0
+  Stream #0.1 -> #0.1
+Press [q] to stop encoding
+frame= 5890 fps= 16 q=-1.0 Lsize=   26510kB time=196.86 bitrate=1103.2kbits/s dup=0 drop=9    
+video:24507kB audio:1889kB global headers:0kB muxing overhead 0.430602%
+frame I:40    Avg QP:16.90  size: 21557
+[libx264 @ 0x10181f400] frame P:5850  Avg QP:18.80  size:  4142
+[libx264 @ 0x10181f400] mb I  I16..4: 24.0% 52.1% 23.9%
+[libx264 @ 0x10181f400] mb P  I16..4:  1.1%  2.5%  0.8%  P16..4: 27.0% 15.6%  8.0%  0.0%  0.0%    skip:44.9%
+[libx264 @ 0x10181f400] final ratefactor: 19.40
+[libx264 @ 0x10181f400] 8x8 transform intra:56.0% inter:57.8%
+[libx264 @ 0x10181f400] coded y,uvDC,uvAC intra: 47.4% 63.9% 43.6% inter: 20.8% 19.6% 4.1%
+[libx264 @ 0x10181f400] i16 v,h,dc,p: 64% 23%  9%  5%
+[libx264 @ 0x10181f400] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 21% 19%  4%  5%  6%  5%  6%  6%
+[libx264 @ 0x10181f400] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 22% 15%  4%  5%  6%  5%  6%  6%
+[libx264 @ 0x10181f400] i8c dc,h,v,p: 48% 24% 23%  6%
+[libx264 @ 0x10181f400] Weighted P-Frames: Y:2.1% UV:1.8%
+[libx264 @ 0x10181f400] ref P L0: 78.7%  9.4%  8.3%  2.1%  1.4%  0.0%
+[libx264 @ 0x10181f400] kb/s:1019.80

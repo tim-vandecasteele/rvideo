@@ -29,7 +29,14 @@ end
 ###
 
 def load_fixture(name)
-  YAML.load_file("#{FIXTURE_PATH}/#{name}.yml")
+  yml = YAML.load_file("#{FIXTURE_PATH}/#{name}.yml")
+  if File.directory?("#{FIXTURE_PATH}/#{name}")
+    Dir["#{FIXTURE_PATH}/#{name}/*.txt"].each do |path|
+      key = File.basename(path, '.txt')
+      yml[key] = File.read(path)
+    end
+  end
+  yml
 end
 
 def spec_file(name)

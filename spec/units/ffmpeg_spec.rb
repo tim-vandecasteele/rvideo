@@ -311,6 +311,22 @@ module RVideo
         @ffmpeg.send(:parse_result, @result.gsub("Lsize=","LPSNR=Y:33.85 U:37.61 V:37.46 *:34.77 size=")).should be_true
         @ffmpeg.psnr.should == "Y:33.85 U:37.61 V:37.46 *:34.77"
       end
+
+      it "should parse mkv output correctly" do
+        @ffmpeg.send(:parse_result, ffmpeg_result(:mkv1))
+        @ffmpeg.frame.should == '5890'
+        @ffmpeg.output_fps.should == "16"
+        @ffmpeg.q.should == '-1.0'
+        @ffmpeg.size.should == '26510kB'
+        @ffmpeg.time.should == '196.86'
+        @ffmpeg.output_bitrate.should == '1103.2kbits/s'
+        @ffmpeg.video_size.should == "24507kB"
+        @ffmpeg.audio_size.should == "1889kB"
+        @ffmpeg.header_size.should == "0kB"
+        @ffmpeg.overhead.should == "0.430602%"
+        @ffmpeg.psnr.should be_nil
+      end
+
     end
     
     describe Ffmpeg, "result parsing should raise an exception" do
