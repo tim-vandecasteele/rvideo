@@ -114,7 +114,16 @@ module RVideo
       end
       
       def format_filter_rotation(params={})
-        "transpose=#{params[:rotate].to_i / 90}"
+        case params[:rotate].to_i
+        when 90
+          "transpose=1"
+        when 180
+          "hflip,vflip"
+        when 270
+          "transpose=2"
+        else 
+          ""
+        end
       end
 
       def format_filter_scale(params={})

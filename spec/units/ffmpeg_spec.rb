@@ -31,7 +31,7 @@ module RVideo
       end
       
       it "should call parse_result on execute, with a ffmpeg result string" do
-        @ffmpeg.should_receive(:parse_result).once.with /\AFFmpeg version/
+        @ffmpeg.should_receive(:parse_result).once.with /ffmpeg version/i
         @ffmpeg.execute
       end
       
@@ -117,6 +117,27 @@ module RVideo
         ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -ar 44100 -ab 64 -vcodec xvid -acodec libmp3lame -r 29.97 -vf 'scale=464:348' -y '#{@options[:output_file]}'"
       end
 
+      it "rotates to 90 degree" do
+        @mock_original_file = mock(:original, :width => 320, :height => 240, :rotated? => true, :video_orientation => 90)
+        RVideo::Inspector.stub!(:new).and_return(@mock_original_file)
+        ffmpeg = RVideo::Tools::Ffmpeg.new("ffmpeg -i $input_file$ $resolution$ -y $output_file$", @options)
+        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -vf 'transpose=1,scale=320:240' -y '#{@options[:output_file]}'"
+      end
+
+      it "rotates to 180 degree" do
+        @mock_original_file = mock(:original, :width => 320, :height => 240, :rotated? => true, :video_orientation => 180)
+        RVideo::Inspector.stub!(:new).and_return(@mock_original_file)
+        ffmpeg = RVideo::Tools::Ffmpeg.new("ffmpeg -i $input_file$ $resolution$ -y $output_file$", @options)
+        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -vf 'hflip,vflip,scale=320:240' -y '#{@options[:output_file]}'"
+      end
+
+      it "rotates to 270 degree" do
+        @mock_original_file = mock(:original, :width => 320, :height => 240, :rotated? => true, :video_orientation => 270)
+        RVideo::Inspector.stub!(:new).and_return(@mock_original_file)
+        ffmpeg = RVideo::Tools::Ffmpeg.new("ffmpeg -i $input_file$ $resolution$ -y $output_file$", @options)
+        ffmpeg.command.should == "ffmpeg -i '#{@options[:input_file]}' -vf 'transpose=2,scale=320:240' -y '#{@options[:output_file]}'"
+      end
+      
       it 'supports nil width or height' do
         @mock_original_file = mock(:original, :width => 0, :height => 0, :rotated? => false)
         RVideo::Inspector.stub!(:new).and_return(@mock_original_file)

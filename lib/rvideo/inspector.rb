@@ -370,7 +370,7 @@ module RVideo # :nodoc:
     # The width of the video in pixels.
     def width
       return nil unless video?
-      if aspect_rotated?
+      if transposed?
         video_match[6].to_i
       else
         video_match[5].to_i
@@ -380,7 +380,7 @@ module RVideo # :nodoc:
     # The height of the video in pixels.
     def height
       return nil unless video?
-      if aspect_rotated?
+      if transposed?
         video_match[5].to_i
       else
         video_match[6].to_i
@@ -407,12 +407,12 @@ module RVideo # :nodoc:
       0
     end
     
-    def rotated?
-      video_orientation != 0
+    def transposed?
+      video_orientation % 180 == 90
     end
     
-    def aspect_rotated?
-      video_orientation % 180 == 90
+    def rotated?
+      video_orientation != 0
     end
     
     def pixel_aspect_ratio
