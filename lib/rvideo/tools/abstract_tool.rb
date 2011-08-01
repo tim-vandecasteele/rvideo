@@ -105,7 +105,7 @@ module RVideo # :nodoc:
         end
 
         def get_original_fps
-          return {} if original.fps.nil?
+          return {} unless original.fps.to_i > 0
           { :fps => original.fps }
         end
 
