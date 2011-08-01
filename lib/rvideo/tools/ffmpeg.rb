@@ -56,7 +56,7 @@ module RVideo
       end
 
       def format_fps(params={})
-        "-r %0.2f" % params[:fps].to_f
+        "-r %0.2f" % params[:fps].to_f if params[:fps]
       end
       
       def format_video_bit_rate(params = {})
