@@ -444,7 +444,10 @@ module RVideo # :nodoc:
     #
     def fps
       return nil unless video?
-      video_match[2] || video_match[13] || video_match[14]
+      fps = video_match[2] || video_match[13] || video_match[14]
+      fps = fps.to_f * 1000 if fps =~ /\d+k/i
+      fps = fps.to_f if fps
+      fps
     end
     alias_method :framerate, :fps
     

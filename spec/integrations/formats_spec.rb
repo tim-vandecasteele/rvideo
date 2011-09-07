@@ -19,7 +19,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 176
       file.height.should == 144
-      file.fps.should == "10.00"
+      file.fps.should == 10.0
     end
     
     it "a cell-phone MP4 file (2)" do
@@ -39,7 +39,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 176
       file.height.should == 144
-      file.fps.should == "10.00"
+      file.fps.should == 10.0
     end
     
     it "fancypants" do
@@ -59,7 +59,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 720
       file.height.should == 400
-      file.fps.should == "23.98"
+      file.fps.should == 23.98
     end
     
     it "mpeg4/xvid" do
@@ -79,7 +79,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 624
       file.height.should == 352
-      file.fps.should == "23.98"
+      file.fps.should == 23.98
     end
     
     it "mpeg1" do
@@ -99,7 +99,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 320
       file.height.should == 240
-      file.fps.should == "25.00"
+      file.fps.should == 25.0
     end
     
     it "avi/mpeg4/mp3" do
@@ -119,7 +119,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 640
       file.height.should == 464
-      file.fps.should == "23.98"
+      file.fps.should == 23.98
     end
     
     it "HD mpeg2" do
@@ -139,7 +139,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 1440
       file.height.should == 1080
-      file.fps.should == "29.97"
+      file.fps.should == 29.97
     end
     
     it "h264 (1)" do
@@ -159,7 +159,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 1280
       file.height.should == 720
-      file.fps.should == "29.97"
+      file.fps.should == 29.97
     end
     
     it "h264 video only" do
@@ -176,7 +176,7 @@ module RVideo
       file.video_colorspace.should == "yuv420p"
       file.width.should == 320
       file.height.should == 180
-      file.fps.should == "29.97"
+      file.fps.should == 29.97
     end
     
     it "aac audio only" do
@@ -212,7 +212,7 @@ module RVideo
       file.video_colorspace.should == nil
       file.width.should == 1280
       file.height.should == 720
-      file.fps.should == "600.00" # this is a known FFMPEG problem
+      file.fps.should == 600.0 # this is a known FFMPEG problem
     end
     
     it "dv video" do

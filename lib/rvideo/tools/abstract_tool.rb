@@ -105,7 +105,9 @@ module RVideo # :nodoc:
         end
 
         def get_original_fps
-          return {} unless original.fps.to_i > 0
+          original_fps = original.fps
+          return { :fps => 29.97 } unless original_fps
+          return { :fps => 29.97 } if original_fps > 100
           { :fps => original.fps }
         end
 
